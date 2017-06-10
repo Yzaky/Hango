@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "105345494852",
+    "firebase_url": "https://hango-98d15.firebaseio.com",
+    "project_id": "hango-98d15",
+    "storage_bucket": "hango-98d15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105345494852:android:0311779521a85357",
+        "android_client_info": {
+          "package_name": "com.example.youss.hango.live"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105345494852-qf7aob9tgqu7q0mjmmecb5jtekj0u6cu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.youss.hango.live",
+            "certificate_hash": "8ee7941779a6b2e3be3a8fe6e58fc5b989136909"
+          }
+        },
+        {
+          "client_id": "105345494852-q5o1t2rmfbg11t1u8f3h84kq32tsdfdn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb0CVwmwOYrdCcoGChyynJhkcnWfbjXBE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105345494852-q5o1t2rmfbg11t1u8f3h84kq32tsdfdn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
