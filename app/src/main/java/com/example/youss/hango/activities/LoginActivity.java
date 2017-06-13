@@ -47,7 +47,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         linearLayout.setBackgroundResource(R.drawable.background_screen_two);
-        FirebaseAuth.getInstance().signOut();
+        //FirebaseAuth.getInstance().signOut();
 
         myProgressDialog = new ProgressDialog(this);
         myProgressDialog.setTitle("Loading...");
