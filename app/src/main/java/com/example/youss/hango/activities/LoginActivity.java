@@ -1,7 +1,9 @@
 package com.example.youss.hango.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -11,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.example.youss.hango.R;
+import com.example.youss.hango.infrastructure.Utilities;
 import com.example.youss.hango.services.AccountServices;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -39,8 +42,9 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.activitymainuseremail) EditText userEmail;
     @BindView(R.id.activitymainuserpassword) EditText userPassword;
     @BindView(R.id.facebook_login_button) LoginButton FacebookButton;
-    CallbackManager myCallbackMAnager;
-    ProgressDialog myProgressDialog;
+    private CallbackManager myCallbackMAnager;
+    private ProgressDialog myProgressDialog;
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,9 @@ public class LoginActivity extends BaseActivity {
         myProgressDialog.setTitle("Loading...");
         myProgressDialog.setMessage("Attempting to Log in ");
         myProgressDialog.setCancelable(false);
+
+        sharedPreferences=getSharedPreferences(Utilities.MyPreferences, Context.MODE_PRIVATE);// we will save everything in
+
     }
     @OnClick(R.id.activitymainregisterbutton)
     public void setRegisterButton(){
@@ -62,7 +69,7 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.activitymainloginbutton)
     public void setLoginButton(){
         myBus.post(new AccountServices.RequestaUserLogIn(userEmail.getText().toString(),
-                userPassword.getText().toString(),myProgressDialog));
+                userPassword.getText().toString(),myProgressDialog,sharedPreferences));
     }
 
     @OnClick (R.id.facebook_login_button)
@@ -84,7 +91,8 @@ public class LoginActivity extends BaseActivity {
                         try {
                             String name=object.getString("name");
                             String email= object.getString("email");
-                            myBus.post(new AccountServices.RequestAFacebookLogin(loginResult.getAccessToken(),myProgressDialog, name,email));
+                            myBus.post(new AccountServices.RequestAFacebookLogin(loginResult.getAccessToken(),
+                                    myProgressDialog, name,email,sharedPreferences));
                         }catch (JSONException e)
                         {
                             e.printStackTrace();

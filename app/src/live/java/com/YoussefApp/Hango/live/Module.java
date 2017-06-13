@@ -7,7 +7,7 @@ public class Module {
 
     public static void Register(Hango application)
     {
-        new AccountServiceLive(application);
+        new AccountServicesLive(application);
 
     }
 }

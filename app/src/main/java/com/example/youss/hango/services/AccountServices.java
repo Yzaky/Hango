@@ -1,6 +1,7 @@
 package com.example.youss.hango.services;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 
 import com.example.youss.hango.infrastructure.ServiceResponse;
 import com.facebook.AccessToken;
@@ -16,12 +17,16 @@ public class AccountServices {
         public String userName;
         public String userEmail;
         public ProgressDialog myprogressDialog;
+        public SharedPreferences sharedPreferences;
 
-        public RegisterANewUser(String userName, String userEmail, ProgressDialog progressDialog) {
+
+        public RegisterANewUser(String userName, String userEmail, ProgressDialog myprogressDialog, SharedPreferences sharedPreferences) {
             this.userName = userName;
             this.userEmail = userEmail;
-            this.myprogressDialog = progressDialog;
+            this.myprogressDialog = myprogressDialog;
+            this.sharedPreferences = sharedPreferences;
         }
+
     }
 
     public static class RegisterANewUserResponse extends ServiceResponse {
@@ -33,11 +38,13 @@ public class AccountServices {
         public String userEmail;
         public String userPassword;
         public ProgressDialog myprogressDialog;
+        public SharedPreferences sharedPreferences;
 
-        public RequestaUserLogIn(String userEmail, String userPassword, ProgressDialog progressDialog) {
+        public RequestaUserLogIn(String userEmail, String userPassword, ProgressDialog progressDialog, SharedPreferences sharedPreferences) {
             this.userEmail = userEmail;
             this.userPassword = userPassword;
             this.myprogressDialog = progressDialog;
+            this.sharedPreferences= sharedPreferences;
         }
 
     }
@@ -50,13 +57,14 @@ public class AccountServices {
         public ProgressDialog myprogressDialog;
         public String username;
         public String userEmail;
+        public SharedPreferences sharedPreferences;
 
-        public RequestAFacebookLogin(AccessToken accessToken, ProgressDialog progressDialog, String username, String userEmail) {
+        public RequestAFacebookLogin(AccessToken accessToken, ProgressDialog myprogressDialog, String username, String userEmail, SharedPreferences sharedPreferences) {
             this.accessToken = accessToken;
-            this.myprogressDialog = progressDialog;
+            this.myprogressDialog = myprogressDialog;
             this.username = username;
             this.userEmail = userEmail;
+            this.sharedPreferences = sharedPreferences;
         }
-
     }
 }

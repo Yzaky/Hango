@@ -2,6 +2,7 @@ package com.example.youss.hango.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -25,6 +26,7 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.activityregisterregisterButton) Button registerButton;
 
     ProgressDialog myProgressDialog;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,7 @@ public class RegisterActivity extends BaseActivity {
     public void setRegisterButton(){
                         //Passing the post to the bus
         myBus.post(new AccountServices.RegisterANewUser(
-                userName.getText().toString(),userEmail.getText().toString(),myProgressDialog));
+                userName.getText().toString(),userEmail.getText().toString(),myProgressDialog,sharedPreferences));
 
     }
     @Subscribe

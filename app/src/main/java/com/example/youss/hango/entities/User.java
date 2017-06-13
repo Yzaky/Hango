@@ -1,34 +1,39 @@
 package com.example.youss.hango.entities;
 
+
 import java.util.HashMap;
 
-
 public class User {
-    private String Useremail;
-    private String Username;
-    private HashMap<String,Object> UserdateJoined;
-    private boolean hasLoggedWithPassword;
+    private String email;
+    private String name;
+    private HashMap<String,Object> timeJoined;
+    private boolean hasLoggedInWithPassword;
 
-    public User(String email, String name, HashMap<String, Object> dateJoined, boolean hasLoggedWithPassword) {
-        this.Useremail = email;
-        this.Username = name;
-        this.UserdateJoined = dateJoined;
-        this.hasLoggedWithPassword = hasLoggedWithPassword;
+
+    public User() {
     }
 
+    public User(String email, String name, HashMap<String, Object> dateJoined, boolean hasLoggedInWithPassword) {
+        this.email = email;
+        this.name = name;
+        this.timeJoined = dateJoined;
+        this.hasLoggedInWithPassword = hasLoggedInWithPassword;
+    }
+
+
     public String getEmail() {
-        return Useremail;
+        return email;
     }
 
     public String getName() {
-        return Username;
+        return name;
     }
 
-    public HashMap<String, Object> usergetDateJoined() {
-        return UserdateJoined;
+    public HashMap<String, Object> getTimeJoined() {
+        return timeJoined;
     }
 
-    public boolean didUserLogInWithPassword() {
-        return hasLoggedWithPassword;
+    public boolean isHasLoggedInWithPassword() {
+        return hasLoggedInWithPassword;
     }
 }

@@ -1,6 +1,8 @@
 package com.example.youss.hango.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -12,6 +14,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.example.youss.hango.infrastructure.Hango;
+import com.example.youss.hango.infrastructure.Utilities;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.otto.Bus;
@@ -26,15 +29,19 @@ public class BaseActivity extends AppCompatActivity{
     protected Bus myBus;
     protected FirebaseAuth myAuth;
     protected FirebaseAuth.AuthStateListener myAuthStateListener;
-
+    protected String UserEmail;
+    protected String Username;
+    protected SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         application=(Hango)getApplication();
         myBus=application.getBus();
         myBus.register(this);
+        sharedPreferences=getSharedPreferences(Utilities.MyPreferences, Context.MODE_PRIVATE);
+        Username=sharedPreferences.getString(Utilities.Username,"");
+        UserEmail=sharedPreferences.getString(Utilities.Email,"");
         myAuth= FirebaseAuth.getInstance();
-
         if(!((this instanceof LoginActivity) ||
                 (this instanceof RegisterActivity)
                 || (this instanceof SplashScreen)))
@@ -47,11 +54,25 @@ public class BaseActivity extends AppCompatActivity{
                     if(User==null)
                     {
                         //user not logged in
-                        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                        SharedPreferences.Editor Editor=sharedPreferences.edit();
+                        Editor.putString(Utilities.Email,null).apply();
+                        Editor.putString(Utilities.Username,null).apply();
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                         finish();
                     }
+
                 }
             };
+
+            if(UserEmail.equals(""))
+            {
+                SharedPreferences.Editor Editor=sharedPreferences.edit();
+                Editor.putString(Utilities.Email,null).apply();
+                Editor.putString(Utilities.Username,null).apply();
+                myAuth.signOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+             }
         }
     }
 
