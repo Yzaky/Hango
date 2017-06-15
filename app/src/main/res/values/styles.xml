@@ -11,4 +11,12 @@
     <style name="SplashScreen" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground"> @drawable/splashscreen</item>
     </style>
+
+    <style name="EvAB">
+        <item name="android:layout_margin">0dp</item>
+        <item name="rippleColor">#ffff8800</item>
+        <item name="fabSize">normal</item>
+
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
 </resources>

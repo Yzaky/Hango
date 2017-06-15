@@ -8,6 +8,7 @@ public class Module {
     public static void Register(Hango application)
     {
         new AccountServicesLive(application);
+        new EventServiceLive(application);
 
     }
 }

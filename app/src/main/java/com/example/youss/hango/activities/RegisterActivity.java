@@ -3,6 +3,7 @@ package com.example.youss.hango.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -32,7 +33,8 @@ public class RegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        linearLayout2.setBackgroundResource(R.drawable.background_screen_two);
+        //linearLayout2.setBackgroundResource(R.drawable.background_screen_two);
+        linearLayout2.setBackgroundColor(Color.WHITE);
 
         myProgressDialog = new ProgressDialog(this);
         myProgressDialog.setTitle("Loading...");
@@ -48,7 +50,7 @@ public class RegisterActivity extends BaseActivity {
 
     @OnClick(R.id.activityregisterregisterButton)
     public void setRegisterButton(){
-                        //Passing the post to the bus
+                        //Passing the post to the myBus
         myBus.post(new AccountServices.RegisterANewUser(
                 userName.getText().toString(),userEmail.getText().toString(),myProgressDialog,sharedPreferences));
 

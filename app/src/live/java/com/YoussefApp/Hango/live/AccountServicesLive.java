@@ -94,7 +94,7 @@ public class AccountServicesLive extends LiveServiceBaseClass {
 
         }
 
-        bus.post(response);
+        myBus.post(response);
     }
 
     @Subscribe
@@ -152,7 +152,7 @@ public class AccountServicesLive extends LiveServiceBaseClass {
                     });
 
         }
-        bus.post(response);
+        myBus.post(response);
     }
 
 

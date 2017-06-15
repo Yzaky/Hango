@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -50,7 +51,9 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        linearLayout.setBackgroundResource(R.drawable.background_screen_two);
+        //linearLayout.setBackgroundResource(R.drawable.background_screen_two);
+        linearLayout.setBackgroundColor(Color.WHITE);
+
         //FirebaseAuth.getInstance().signOut();
 
         myProgressDialog = new ProgressDialog(this);

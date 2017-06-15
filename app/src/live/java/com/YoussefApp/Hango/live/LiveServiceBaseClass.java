@@ -7,14 +7,14 @@ import com.squareup.otto.Bus;
 
 public class LiveServiceBaseClass {
 
-    protected Bus bus;
+    protected Bus myBus;
     protected Hango application;
     protected FirebaseAuth auth;
 
     public LiveServiceBaseClass(Hango application) {
         this.application = application;
-        bus=application.getBus();
-        bus.register(this);
+        myBus =application.getBus();
+        myBus.register(this);
         auth =  FirebaseAuth.getInstance();
     }
 }

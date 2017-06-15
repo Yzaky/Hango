@@ -14,7 +14,7 @@ public class Utilities {
 
     public static final String FireBaseURL="https://hango-98d15.firebaseio.com/";
     public static final String FireBaseUserReferences= FireBaseURL+ "users/";
-
+    public static final String FireBaseHangoReferences= FireBaseURL+ "userHango/";
     public static final String MyPreferences= "MYPREFERENCES";
     public static final String Email="Email";
     public static final String Username="Username";
@@ -25,6 +25,10 @@ public class Utilities {
 
     }
 
+    public static String decodeEmail(String userEmail)
+    {
+        return userEmail.replace(",",".");
+    }
     public static void logOut(Context context, SharedPreferences sharedPreferences, FirebaseAuth auth)
     {
         SharedPreferences.Editor Editor=sharedPreferences.edit();
