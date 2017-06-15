@@ -12,6 +12,7 @@ import com.firebase.client.ServerValue;
 import com.squareup.otto.Subscribe;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class EventServiceLive extends  LiveServiceBaseClass {
@@ -30,17 +31,17 @@ public class EventServiceLive extends  LiveServiceBaseClass {
         }
         if(response.didSucceed()) {
             Firebase ref=new Firebase(Utilities.FireBaseHangoReferences + request.CreatorEmail).push();//random string
-            HashMap<String,Object> timeCreated = new HashMap<>();
-            timeCreated.put("timestamp", ServerValue.TIMESTAMP);// to keep track when it was created
+            Object timeCreated;
+            timeCreated=ServerValue.TIMESTAMP;// to keep track when it was created
             Event event= new Event(ref.getKey(),request.EventName,Utilities.decodeEmail(request.CreatorEmail),
                     request.CreatorName,timeCreated);
-            ref.child("id").setValue(event.getID());
-            ref.child("Eventname").setValue(event.getEventname());
-            ref.child("Creator").setValue(event.getCreator());
-            ref.child("CreatorEmail").setValue(event.getCreatorEmail());
-            ref.child("DateCreated").setValue(event.getDateCreated());
-            ref.child("DateLastChanged").setValue(event.getDateLastChanged());
-            Toast.makeText(application.getApplicationContext(),"Hango is Being Created",Toast.LENGTH_LONG).show();
+            ref.child("id").setValue(event.getid());
+            ref.child("eventName").setValue(event.geteventName());
+            ref.child("creator").setValue(event.getcreator());
+            ref.child("creatorEmail").setValue(event.getcreatorEmail());
+            ref.child("dateCreated").setValue(event.getdateCreated());
+            ref.child("dateLastChanged").setValue(event.getdateLastChanged());
+            Toast.makeText(application.getApplicationContext(),"Hango is being Created",Toast.LENGTH_LONG).show();
 
         }
         myBus.post(response);

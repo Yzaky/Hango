@@ -10,6 +10,8 @@
         android:id="@+id/add_event_editText"
         android:hint="Enter Your Hango Name"
         android:textColor="#000"
-        android:textColorHint="#000"
+        android:textColorHint="@color/colorAccent"
+        android:backgroundTint="#fff"
+
         />
 </FrameLayout>
