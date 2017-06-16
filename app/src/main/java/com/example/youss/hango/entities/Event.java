@@ -1,4 +1,7 @@
 package com.example.youss.hango.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.firebase.*;
 
 import com.firebase.client.ServerValue;
 
@@ -12,7 +15,9 @@ public class Event {
     private String creator;
     /*private Map<String,Object> dateCreated;
     private Map<String,Object> dateLastChanged;*/
+    @JsonProperty
     private Object dateCreated;
+    @JsonProperty
     private Object dateLastChanged;
 
     public Event() {
@@ -45,6 +50,7 @@ public class Event {
         return creator;
     }
 
+    @JsonIgnore
     public Object getdateCreated() {
         if(dateLastChanged!=null)
         {
@@ -53,7 +59,7 @@ public class Event {
        Object DateCreatedObject=ServerValue.TIMESTAMP;
         return DateCreatedObject;
     }
-
+    @JsonIgnore
     public Object getdateLastChanged() {
         return dateLastChanged;
     }

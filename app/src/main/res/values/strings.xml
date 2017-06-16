@@ -2,4 +2,12 @@
     <string name="app_name">Hango</string>
     <string name="facebook_app_id">233168850509513</string>
     <string name="fb_login_protocol_scheme">fb233168850509513</string>
+    <string name="sort_hango_by_name">sort_hango_by_name</string>
+    <string name="sort_hango_by_title">Order By</string>
+    <string name="hango_created_time">Created Time</string>
+    <string name="hango_name">Hango Name</string>
+    <string name="hango_owner">Creator</string>
+    <string name="hango_created_time_value">OrderByPushKey</string>
+    <string name="hango_name_value">eventName</string>
+    <string name="hango_owner_value">creatorEmail</string>
 </resources>

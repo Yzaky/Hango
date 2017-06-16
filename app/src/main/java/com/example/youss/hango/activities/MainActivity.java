@@ -4,11 +4,13 @@ import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +18,13 @@ import android.widget.Toast;
 
 import com.example.youss.hango.R;
 import com.example.youss.hango.dialog.AddEventDialogFragment;
+import com.example.youss.hango.dialog.DeleteEventDialogFragment;
 import com.example.youss.hango.entities.Event;
 import com.example.youss.hango.entities.User;
 import com.example.youss.hango.infrastructure.Utilities;
 import com.example.youss.hango.views.EventListViews.EventsListViewHolder;
 import com.firebase.client.Firebase;
+import com.firebase.client.Query;
 import com.firebase.ui.FirebaseRecyclerAdapter;
 
 import butterknife.BindView;
@@ -62,7 +66,19 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         Firebase EventRef = new Firebase(Utilities.FireBaseHangoReferences + UserEmail);
-        myAdapter = new FirebaseRecyclerAdapter<Event, EventsListViewHolder>(Event.class, R.layout.events_list, EventsListViewHolder.class, EventRef) {
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getApplication());
+        String Order=sharedPreferences.getString(Utilities.MyPreferences,Utilities.OrderByKey);
+        Query SortQuery;
+        //Log.i(MainActivity.class.getSimpleName(),Sort);
+        if(Order.equals(Utilities.OrderByKey))
+        {
+            SortQuery=EventRef.orderByKey();
+        }
+        else {
+            // In that case it will be our list name or Owner email
+            SortQuery=EventRef.orderByChild(Order);
+        }
+        myAdapter = new FirebaseRecyclerAdapter<Event, EventsListViewHolder>(Event.class, R.layout.events_list, EventsListViewHolder.class, SortQuery) {
             @Override
             protected void populateViewHolder(EventsListViewHolder eventsListViewHolder, final Event event, int i) {
                 eventsListViewHolder.populate(event);
@@ -71,6 +87,25 @@ public class MainActivity extends BaseActivity {
                     public void onClick(View view) {
                         Toast.makeText(getApplicationContext(),event.geteventName()
                                 +" was clicked",Toast.LENGTH_LONG).show();
+                    }
+                });
+                eventsListViewHolder.LayoutView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        //check that the owner of the list is the owner of the email right now
+                       // Log.i("Creator Email",Utilities.encodeEmail(event.getcreatorEmail()));
+                      //  Log.i("User Email",UserEmail);
+                        if(UserEmail.equals(Utilities.encodeEmail(event.getcreatorEmail())))
+                        {
+                            DialogFragment dialogFragment= DeleteEventDialogFragment.newInstance(event.getid(),true);
+                            dialogFragment.show(getFragmentManager(),DeleteEventDialogFragment.class.getSimpleName());
+                             return true;
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(),"Only The Creator Can Delete The Hango",Toast.LENGTH_LONG)
+                                    .show();
+                            return true;
+                        }
                     }
                 });
             }
@@ -99,10 +134,12 @@ public class MainActivity extends BaseActivity {
                 myAuth.signOut();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
-                myProgressDialog.dismiss();
+                return true;
+            case R.id.sort:
+                startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
+                return true;
         }
-
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.activity_main_EVAB)

@@ -18,7 +18,8 @@ public class Utilities {
     public static final String MyPreferences= "MYPREFERENCES";
     public static final String Email="Email";
     public static final String Username="Username";
-
+    public static final String EventOrderPreferences= "EVENT_ORDER_PREFERENCES";
+    public static final String OrderByKey="OrderByPushKey";
     public static String encodeEmail(String userEmail)
     {
         return userEmail.replace(".",",");

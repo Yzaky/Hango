@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sort_entries">
+        <item>@string/hango_created_time</item>
+        <item>@string/hango_name</item>
+        <item>@string/hango_owner</item>
+    </string-array>
+
+    <string-array name="sort_entries_values">
+        <item>@string/hango_created_time_value</item>
+        <item>@string/hango_name_value</item>
+        <item>@string/hango_owner_value</item>
+    </string-array>
+
+
+
+</resources>

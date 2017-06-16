@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+            android:key="@string/sort_hango_by_name"
+            android:title="Hango Order"
+            android:dialogTitle="@string/sort_hango_by_title"
+            android:entries="@array/sort_entries"
+            android:entryValues="@array/sort_entries_values"
+            android:defaultValue="@string/hango_created_time_value"
+            android:summary="@string/hango_created_time"
+        />
+
+</PreferenceScreen>

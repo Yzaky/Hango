@@ -25,5 +25,15 @@ public class EventService {
     public static class AddEventResponse extends ServiceResponse{
 
     }
+
+    public static class DeleteEventRequest {
+        public String CreatorEmail;
+        public String EventId;
+
+        public DeleteEventRequest(String creatorEmail, String eventId) {
+            CreatorEmail = creatorEmail;
+            EventId = eventId;
+        }
+    }
 }
 

@@ -41,9 +41,16 @@ public class EventServiceLive extends  LiveServiceBaseClass {
             ref.child("creatorEmail").setValue(event.getcreatorEmail());
             ref.child("dateCreated").setValue(event.getdateCreated());
             ref.child("dateLastChanged").setValue(event.getdateLastChanged());
-            Toast.makeText(application.getApplicationContext(),"Hango is being Created",Toast.LENGTH_LONG).show();
+            Toast.makeText(application.getApplicationContext(),"Your Hango Was Posted Successfully",Toast.LENGTH_LONG).show();
 
         }
         myBus.post(response);
+    }
+
+    @Subscribe
+    public void deleteEvent(EventService.DeleteEventRequest request)
+    {
+        Firebase ref=new Firebase(Utilities.FireBaseHangoReferences+request.CreatorEmail+"/"+request.EventId); // Full path to the evnet
+        ref.removeValue();
     }
 }
