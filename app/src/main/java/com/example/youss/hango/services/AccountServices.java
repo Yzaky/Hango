@@ -3,8 +3,11 @@ package com.example.youss.hango.services;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 
+import com.example.youss.hango.entities.Event;
 import com.example.youss.hango.infrastructure.ServiceResponse;
 import com.facebook.AccessToken;
+import com.firebase.client.Firebase;
+import com.firebase.client.ValueEventListener;
 
 
 public class AccountServices {
@@ -67,4 +70,6 @@ public class AccountServices {
             this.sharedPreferences = sharedPreferences;
         }
     }
+
+
 }

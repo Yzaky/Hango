@@ -27,6 +27,8 @@ import com.firebase.client.Firebase;
 import com.firebase.client.Query;
 import com.firebase.ui.FirebaseRecyclerAdapter;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -85,8 +87,13 @@ public class MainActivity extends BaseActivity {
                 eventsListViewHolder.LayoutView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getApplicationContext(),event.geteventName()
-                                +" was clicked",Toast.LENGTH_LONG).show();
+                       /* Toast.makeText(getApplicationContext(),event.geteventName()
+                                +" was clicked",Toast.LENGTH_LONG).show();*/
+                        ArrayList<String> HangoInfo= new ArrayList<>();
+                        HangoInfo.add(event.getid());
+                        HangoInfo.add(event.geteventName());
+                        HangoInfo.add(event.getcreator());
+                        startActivity(HangoDetails.newInstance(getApplicationContext(),HangoInfo));
                     }
                 });
                 eventsListViewHolder.LayoutView.setOnLongClickListener(new View.OnLongClickListener() {
