@@ -27,25 +27,12 @@ public class EventServiceLive extends  LiveServiceBaseClass {
     public void addEvent(EventService.AddEventRequest request)
     {
         EventService.AddEventResponse response = new EventService.AddEventResponse();
-        if(request.EventName.isEmpty())
-        {
+        if(request.EventName.isEmpty()) {
             response.setError("HangoName","Please Choose a Hango Name");
-
         }
         if(response.didSucceed()) {
-            Firebase ref=new Firebase(Utilities.FireBaseHangoReferences + request.CreatorEmail).push();//random string
-            Object timeCreated;
-            timeCreated=ServerValue.TIMESTAMP;// to keep track when it was created
-            Event event= new Event(ref.getKey(),request.EventName,Utilities.decodeEmail(request.CreatorEmail),
-                    request.CreatorName,timeCreated);
-            ref.child("id").setValue(event.getid());
-            ref.child("eventName").setValue(event.geteventName());
-            ref.child("creator").setValue(event.getcreator());
-            ref.child("creatorEmail").setValue(event.getcreatorEmail());
-            ref.child("dateCreated").setValue(event.getdateCreated());
-            ref.child("dateLastChanged").setValue(event.getdateLastChanged());
+            Event event= new Event(request.EventName,request.CreatorEmail, request.CreatorName);
             Toast.makeText(application.getApplicationContext(),"Your Hango Was Posted Successfully",Toast.LENGTH_LONG).show();
-
         }
         myBus.post(response);
     }
