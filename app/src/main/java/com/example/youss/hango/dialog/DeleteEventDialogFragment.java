@@ -53,7 +53,12 @@ public class DeleteEventDialogFragment extends BaseDialog implements View.OnClic
         {
             dismiss();
             mybus.post(new EventService.DeleteEventRequest(userEmail,eventId)); //Will only allow the event to be deleted if he is the creator of it "Hango"
-
+        }
+        else
+        {
+            dismiss();
+            getActivity().finish();
+            mybus.post(new EventService.DeleteEventRequest(userEmail,eventId));
         }
     }
 }

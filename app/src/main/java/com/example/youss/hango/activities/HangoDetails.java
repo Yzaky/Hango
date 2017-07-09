@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.example.youss.hango.R;
 import com.example.youss.hango.dialog.ChangeHangoNameFragment;
+import com.example.youss.hango.dialog.DeleteEventDialogFragment;
 import com.example.youss.hango.entities.Event;
 import com.example.youss.hango.entities.User;
 import com.example.youss.hango.infrastructure.Hango;
@@ -71,6 +72,11 @@ public class HangoDetails extends BaseActivity {
                 DialogFragment dialog = ChangeHangoNameFragment.newInstance(HangoInfo);
                 dialog.show(getFragmentManager(), ChangeHangoNameFragment.class.getSimpleName());
                 return true;
+
+            case R.id.delete_hango: // Si on veut supprimer l'evenemnet
+                DialogFragment dialog1 = DeleteEventDialogFragment.newInstance(HangoID,false);
+                dialog1.show(getFragmentManager(),DeleteEventDialogFragment.class.getSimpleName());
+
         }
         return true;
     }

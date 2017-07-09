@@ -2,10 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    //This is for the Hango top Bar
+
     <item
         android:id="@+id/change_hango_name"
         android:title="Change Hango Name"
         app:showAsAction="ifRoom"
         android:icon="@mipmap/ic_changehangoname"
+        />
+
+    <item android:id="@+id/delete_hango"
+        android:title="Delete Hango"
+        app:showAsAction="ifRoom"
+        android:icon="@mipmap/ic_trash"
+
         />
 </menu>
