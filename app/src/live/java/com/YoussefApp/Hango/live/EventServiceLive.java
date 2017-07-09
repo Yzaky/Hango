@@ -32,7 +32,7 @@ public class EventServiceLive extends  LiveServiceBaseClass {
             response.setError("HangoName","Please Choose a Hango Name");
 
         }
-        if(response.didSucceed()) {
+        if(response.didSucceed()) { //test
             Firebase ref=new Firebase(Utilities.FireBaseHangoReferences + request.CreatorEmail).push();//random string
             Object timeCreated;
             timeCreated=ServerValue.TIMESTAMP;// to keep track when it was created
