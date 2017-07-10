@@ -9,6 +9,7 @@ public class Module {
     {
         new AccountServicesLive(application);
         new EventServiceLive(application);
+        new UsersServiceLive(application);
 
     }
 }

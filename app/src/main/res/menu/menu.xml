@@ -8,11 +8,19 @@
         android:title="logout"
         app:showAsAction="never"
         />
-    <item
+  <!--  <item
         android:id="@+id/sort"
         app:showAsAction="ifRoom"
         android:title="Sort"
         android:icon="@mipmap/ic_sort"
+        android:orderInCategory="100"
+        />
+-->
+    <item
+        android:id="@+id/friends"
+        app:showAsAction="ifRoom"
+        android:title="Sort"
+        android:icon="@mipmap/ic_friends"
         android:orderInCategory="100"
         />
 </menu>

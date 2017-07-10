@@ -6,15 +6,21 @@
 
     <item
         android:id="@+id/change_hango_name"
-        android:title="Change Hango Name"
-        app:showAsAction="ifRoom"
         android:icon="@mipmap/ic_changehangoname"
-        />
+        android:title="Change Hango Name"
+        app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/delete_hango"
-        android:title="Delete Hango"
-        app:showAsAction="ifRoom"
+    <item
+        android:id="@+id/delete_hango"
         android:icon="@mipmap/ic_trash"
+        android:title="Delete Hango"
+        app:showAsAction="ifRoom" />
 
-        />
+    <item
+        android:id="@+id/share_hango"
+        android:icon="@mipmap/ic_share"
+        android:title="Share Hango"
+        app:showAsAction="ifRoom" />
+
+
 </menu>

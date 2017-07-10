@@ -2,21 +2,22 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.youss.hango">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
 
+        android:name=".infrastructure.Hango"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcherr"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".infrastructure.Hango">
+        android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.SplashScreen"
-            android:theme="@style/SplashScreen"
+        <activity
+            android:name=".activities.SplashScreen"
             android:screenOrientation="portrait"
-            >
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,30 +25,40 @@
         </activity>
 
 
-        <activity android:name=".activities.LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+        <activity
+            android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"
-            />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
 
-        <activity android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"
-            />
-
-
-        <activity android:name=".activities.SettingsActivity"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name=".activities.RegisterActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+        <activity
+            android:name=".activities.MainActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".activities.HangoDetails"
+
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.RegisterActivity"
             android:screenOrientation="portrait"
-            />
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".activities.ShareHangoActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.AddFriendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.HangoDetails"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
     </application>
 
 

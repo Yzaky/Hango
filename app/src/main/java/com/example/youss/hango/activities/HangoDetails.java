@@ -76,6 +76,11 @@ public class HangoDetails extends BaseActivity {
             case R.id.delete_hango: // Si on veut supprimer l'evenemnet
                 DialogFragment dialog1 = DeleteEventDialogFragment.newInstance(HangoID,false);
                 dialog1.show(getFragmentManager(),DeleteEventDialogFragment.class.getSimpleName());
+                return true;
+
+            case R.id.share_hango:// Si on veut le partager
+                startActivity(new Intent(this,ShareHangoActivity.class));
+                return true;
 
         }
         return true;
