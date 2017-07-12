@@ -9,17 +9,16 @@
         android:icon="@mipmap/ic_changehangoname"
         android:title="Change Hango Name"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/share_hango"
+        android:icon="@mipmap/ic_share1"
+        android:title="Share Hango"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/delete_hango"
         android:icon="@mipmap/ic_trash"
         android:title="Delete Hango"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/share_hango"
-        android:icon="@mipmap/ic_share"
-        android:title="Share Hango"
         app:showAsAction="ifRoom" />
 
 

@@ -21,6 +21,7 @@ public class Utilities {
     public static final String EventOrderPreferences= "EVENT_ORDER_PREFERENCES";
     public static final String OrderByKey="OrderByPushKey";
     public static final String FireBaseUserFriendReference=FireBaseURL+"usersFriends/";
+    public static final String FireBaseSharedWithReference = FireBaseURL +"sharedWith/";
 
     public static String encodeEmail(String userEmail)
     {

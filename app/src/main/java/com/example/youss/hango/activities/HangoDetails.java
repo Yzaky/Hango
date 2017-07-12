@@ -12,8 +12,7 @@ import com.example.youss.hango.R;
 import com.example.youss.hango.dialog.ChangeHangoNameFragment;
 import com.example.youss.hango.dialog.DeleteEventDialogFragment;
 import com.example.youss.hango.entities.Event;
-import com.example.youss.hango.entities.User;
-import com.example.youss.hango.infrastructure.Hango;
+
 import com.example.youss.hango.infrastructure.Utilities;
 import com.example.youss.hango.services.EventService;
 import com.firebase.client.Firebase;
@@ -79,7 +78,7 @@ public class HangoDetails extends BaseActivity {
                 return true;
 
             case R.id.share_hango:// Si on veut le partager
-                startActivity(new Intent(this,ShareHangoActivity.class));
+                startActivity(new Intent(this,SharedWithActivity.class));
                 return true;
 
         }

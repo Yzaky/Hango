@@ -38,7 +38,7 @@ public class AddFriendActivity extends BaseActivity {
 
         //A recycler view is responsible for providing views that represents items in a data set,
         // here I use it to display the friends
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.activity_addFriend_list_RecyclerView);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.add_friend_recyclerView);
 
         friendsRef = new Firebase(Utilities.FireBaseUserFriendReference + UserEmail);
 
@@ -80,15 +80,11 @@ public class AddFriendActivity extends BaseActivity {
                             if (isFriend(friends.getUsersFriends(), user)) {
                                 friendsRef.removeValue();
                                 addFriendViewholder.userImageView.setImageResource(R.mipmap.ic_plus);
-                                Toast.makeText(getApplicationContext(), "User : " + user.getEmail() +
-                                        " was successfully removed from your list", Toast.LENGTH_LONG).show();
 
                             } else {
                                 // add him into the list
                                 friendsRef.setValue(user);
                                 addFriendViewholder.userImageView.setImageResource(R.mipmap.ic_check);
-                                Toast.makeText(getApplicationContext(), "User : " + user.getEmail() +
-                                        " was successfully added into your list", Toast.LENGTH_LONG).show();
                             }
 
                         }
