@@ -68,5 +68,13 @@ public class EventService {
         public Event event;
         public ValueEventListener valueEventListener;
     }
+
+    public static class UpdateList{
+        public Firebase ref;
+
+        public UpdateList(Firebase ref) {
+            this.ref = ref;
+        }
+    }
 }
 

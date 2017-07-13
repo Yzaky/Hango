@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity {
                         ArrayList<String> HangoInfo= new ArrayList<>();
                         HangoInfo.add(event.getid());
                         HangoInfo.add(event.geteventName());
-                        HangoInfo.add(event.getcreator());
+                        HangoInfo.add(event.getcreatorEmail());
                         startActivity(HangoDetails.newInstance(getApplicationContext(),HangoInfo));
                     }
                 });

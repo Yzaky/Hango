@@ -33,6 +33,7 @@ public class Utilities {
     {
         return userEmail.replace(",",".");
     }
+
     public static void logOut(Context context, SharedPreferences sharedPreferences, FirebaseAuth auth)
     {
         SharedPreferences.Editor Editor=sharedPreferences.edit();

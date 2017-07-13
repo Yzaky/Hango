@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.youss.hango.R;
 import com.example.youss.hango.dialog.ChangeHangoNameFragment;
@@ -47,6 +48,7 @@ public class HangoDetails extends BaseActivity {
         HangoID = getIntent().getStringArrayListExtra(HANGO_DETAILS).get(0);
         HangoName = getIntent().getStringArrayListExtra(HANGO_DETAILS).get(1);
         HangoOwner = getIntent().getStringArrayListExtra(HANGO_DETAILS).get(2);
+
         HangoRef = new Firebase(Utilities.FireBaseHangoReferences + UserEmail + "/" + HangoID);
         myBus.post(new EventService.GetCurrentHangoRequest(HangoRef));
         getSupportActionBar().setTitle(HangoName);
@@ -56,7 +58,10 @@ public class HangoDetails extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_list_details, menu);
+        if(Utilities.encodeEmail(HangoOwner).equals(UserEmail)){
+            getMenuInflater().inflate(R.menu.menu_list_details,menu);
+            return true;
+        }
         return true;
     }
 
@@ -77,8 +82,8 @@ public class HangoDetails extends BaseActivity {
                 dialog1.show(getFragmentManager(),DeleteEventDialogFragment.class.getSimpleName());
                 return true;
 
-            case R.id.share_hango:// Si on veut le partager
-                startActivity(new Intent(this,SharedWithActivity.class));
+            case R.id.share_hango:// Si on veut le partager, on met le Hango ID dans un intent qu'on declare dans la class de share
+                startActivity(SharedWithActivity.newIntent(getApplicationContext(),HangoID));
                 return true;
 
         }

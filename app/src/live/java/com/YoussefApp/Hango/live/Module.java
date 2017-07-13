@@ -11,5 +11,6 @@ public class Module {
         new EventServiceLive(application);
         new UsersServiceLive(application);
 
+
     }
 }

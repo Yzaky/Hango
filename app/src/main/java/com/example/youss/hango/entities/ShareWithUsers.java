@@ -7,19 +7,18 @@ package com.example.youss.hango.entities;
 // So I thought about having a listener for the users
 
 
+import android.support.annotation.Nullable;
+
 import java.util.HashMap;
 
 public class ShareWithUsers {
+    @Nullable
+    private HashMap<String, User> sharedWith;
 
-    private HashMap<String,User> sharedWith;
-
-    public ShareWithUsers(){
-
-    }
-    public ShareWithUsers(HashMap<String, User> sharedWith) {
-        this.sharedWith = sharedWith;
+    public ShareWithUsers() {
     }
 
+    @Nullable
     public HashMap<String, User> getSharedWith() {
         return sharedWith;
     }

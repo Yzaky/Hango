@@ -5,6 +5,7 @@ package com.YoussefApp.Hango.live;
 import android.app.Application;
 import android.widget.Toast;
 
+import com.example.youss.hango.entities.ShareWithUsers;
 import com.example.youss.hango.entities.Users;
 import com.example.youss.hango.infrastructure.Hango;
 import com.example.youss.hango.services.EventService;
@@ -35,6 +36,23 @@ public class UsersServiceLive extends LiveServiceBaseClass {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 response.usersFriends=dataSnapshot.getValue(Users.class); // Like what I did in EventServiceLive
+                myBus.post(response);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Toast.makeText(application.getApplicationContext(),firebaseError.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @Subscribe
+    public void getSharedWith(GetUsersService.GetSharedWithRequest request){
+        final GetUsersService.GetSharedWithResponse response = new GetUsersService.GetSharedWithResponse();
+        response.listener = request.ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                response.SharedWithUsers = dataSnapshot.getValue(ShareWithUsers.class);
                 myBus.post(response);
             }
 

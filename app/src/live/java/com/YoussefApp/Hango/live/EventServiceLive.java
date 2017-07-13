@@ -31,6 +31,7 @@ public class EventServiceLive extends  LiveServiceBaseClass {
             response.setError("HangoName","Please Choose a Hango Name");
         }
         if(response.didSucceed()) {
+
             Event event= new Event(request.EventName,request.CreatorEmail, request.CreatorName);
             Toast.makeText(application.getApplicationContext(),"Your Hango Was Posted Successfully",Toast.LENGTH_LONG).show();
         }
@@ -41,6 +42,8 @@ public class EventServiceLive extends  LiveServiceBaseClass {
     public void deleteEvent(EventService.DeleteEventRequest request)
     {
         Firebase ref=new Firebase(Utilities.FireBaseHangoReferences+request.CreatorEmail+"/"+request.EventId); // Full path to the evnet
+        Firebase SharedWithRef=new Firebase(Utilities.FireBaseSharedWithReference+request.EventId);
+        SharedWithRef.removeValue();
         ref.removeValue();
     }
 
@@ -56,9 +59,8 @@ public class EventServiceLive extends  LiveServiceBaseClass {
 
         if(response.didSucceed()){
 
-            myBus.post(response);
             Firebase ref= new Firebase(Utilities.FireBaseHangoReferences + request.HangoCreatorEmail+"/"+request.HangoID);
-            Object TimeLastChanged=ServerValue.TIMESTAMP;
+            long TimeLastChanged=System.currentTimeMillis();
             //Update the database with updateChildren in case we lost connection
             Map newData= new HashMap();
             newData.put("eventName",request.NewHangoName);
@@ -66,6 +68,7 @@ public class EventServiceLive extends  LiveServiceBaseClass {
             ref.updateChildren(newData);
 
         }
+        myBus.post(response);
     }
 
     @Subscribe
@@ -88,5 +91,14 @@ public class EventServiceLive extends  LiveServiceBaseClass {
                         firebaseError.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Subscribe
+    public void updateReferences(EventService.UpdateList request)
+    {
+        long timeChanged=System.currentTimeMillis();
+        Map newData=new HashMap();
+        newData.put("dateLastChanged",timeChanged);
+        request.ref.updateChildren(newData);
     }
 }
