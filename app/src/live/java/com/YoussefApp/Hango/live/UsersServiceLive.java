@@ -2,13 +2,11 @@ package com.YoussefApp.Hango.live;
 
 //This is the live service we will use for the users in the friendlist for our bus !
 
-import android.app.Application;
 import android.widget.Toast;
 
-import com.example.youss.hango.entities.ShareWithUsers;
+import com.example.youss.hango.entities.SharedWithUsers;
 import com.example.youss.hango.entities.Users;
 import com.example.youss.hango.infrastructure.Hango;
-import com.example.youss.hango.services.EventService;
 import com.example.youss.hango.services.GetUsersService;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
@@ -52,7 +50,7 @@ public class UsersServiceLive extends LiveServiceBaseClass {
         response.listener = request.ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                response.SharedWithUsers = dataSnapshot.getValue(ShareWithUsers.class);
+                response.SharedWithUsers = dataSnapshot.getValue(SharedWithUsers.class);
                 myBus.post(response);
             }
 

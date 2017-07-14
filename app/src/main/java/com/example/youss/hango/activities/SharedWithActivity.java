@@ -7,16 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 
 import com.example.youss.hango.R;
 import com.example.youss.hango.entities.Event;
-import com.example.youss.hango.entities.ShareWithUsers;
+import com.example.youss.hango.entities.SharedWithUsers;
 import com.example.youss.hango.entities.User;
-import com.example.youss.hango.infrastructure.Hango;
 import com.example.youss.hango.infrastructure.Utilities;
 import com.example.youss.hango.services.EventService;
 import com.example.youss.hango.services.GetUsersService;
@@ -39,7 +36,7 @@ public class SharedWithActivity extends BaseActivity {
     private ValueEventListener SharedWithListener;
     private ValueEventListener HangoListener;
 
-    private ShareWithUsers SharedWithUsers;
+    private com.example.youss.hango.entities.SharedWithUsers SharedWithUsers;
     private Event CurrentHango;
 
     private FirebaseRecyclerAdapter adapter;
@@ -133,7 +130,7 @@ public class SharedWithActivity extends BaseActivity {
         if (response.SharedWithUsers != null) {
             SharedWithUsers = response.SharedWithUsers;
         } else {
-            SharedWithUsers = new ShareWithUsers();
+            SharedWithUsers = new SharedWithUsers();
         }
     }
 

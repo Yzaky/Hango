@@ -11,11 +11,11 @@ import android.support.annotation.Nullable;
 
 import java.util.HashMap;
 
-public class ShareWithUsers {
+public class SharedWithUsers {
     @Nullable
     private HashMap<String, User> sharedWith;
 
-    public ShareWithUsers() {
+    public SharedWithUsers() {
     }
 
     @Nullable

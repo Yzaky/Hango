@@ -4,7 +4,6 @@ package com.example.youss.hango.services;
 // We will use this Service for sending Requests and receiving responses using our bus (otto.square)
 // As I did with AccountServices for Log ins and EventService for creating events!
 
-import com.example.youss.hango.entities.ShareWithUsers;
 import com.example.youss.hango.entities.Users;
 import com.firebase.client.Firebase;
 import com.firebase.client.ValueEventListener;
@@ -40,7 +39,7 @@ public class GetUsersService {
 
     public static class GetSharedWithResponse{
         public ValueEventListener listener;
-        public ShareWithUsers SharedWithUsers;
+        public com.example.youss.hango.entities.SharedWithUsers SharedWithUsers;
     }
 
 }
