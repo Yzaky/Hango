@@ -34,7 +34,7 @@ public class AddFriendActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
-        setTitle("Friends List");
+        setTitle("Users List");
 
         //A recycler view is responsible for providing views that represents items in a data set,
         // here I use it to display the friends
@@ -97,11 +97,7 @@ public class AddFriendActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_friend_details, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+
     // Important to clean the adapter
     @Override
     protected void onDestroy() {
