@@ -60,7 +60,7 @@ public class Event {
     public String getcreator() {
         return creator;
     }
-    public Object getdateCreated() { return dateCreated; }
+    public long getdateCreated() { return dateCreated; }
     public Object getdateLastChanged() {
         return dateLastChanged;
     }

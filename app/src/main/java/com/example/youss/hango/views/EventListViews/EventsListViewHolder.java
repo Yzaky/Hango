@@ -1,6 +1,7 @@
 package com.example.youss.hango.views.EventListViews;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,11 +39,11 @@ public class EventsListViewHolder extends RecyclerView.ViewHolder {
         creator.setText(event.getcreator());
         EventName.setText(event.geteventName());
 
-        if(event.getdateCreated()!=null)
-        {
-            DateCreated.setText(new SimpleDateFormat().format(new Date((long)event.getdateCreated())));
-
-        }
+            //DateCreated.setText(new SimpleDateFormat().format(new Date(event.getdateCreated())));
+            long now = System.currentTimeMillis();
+            long due = event.getdateCreated();
+            String relative = DateUtils.getRelativeTimeSpanString(due, now, DateUtils.MINUTE_IN_MILLIS).toString();
+            DateCreated.setText(relative);
     }
 
 }
