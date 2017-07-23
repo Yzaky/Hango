@@ -30,20 +30,17 @@ public class EventsListViewHolder extends RecyclerView.ViewHolder {
 
     public EventsListViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(this,itemView);
+        ButterKnife.bind(this, itemView);
 
     }
 
-    public void populate(Event event)
-    {
+    public void populate(Event event) {
         creator.setText(event.getcreator());
         EventName.setText(event.geteventName());
-
-            //DateCreated.setText(new SimpleDateFormat().format(new Date(event.getdateCreated())));
-            long now = System.currentTimeMillis();
-            long due = event.getdateCreated();
-            String relative = DateUtils.getRelativeTimeSpanString(due, now, DateUtils.MINUTE_IN_MILLIS).toString();
-            DateCreated.setText(relative);
+        long now = System.currentTimeMillis();
+        long due = event.getdateCreated();
+        String relative = DateUtils.getRelativeTimeSpanString(due, now, DateUtils.MINUTE_IN_MILLIS).toString();
+        DateCreated.setText(relative);
     }
 
 }
