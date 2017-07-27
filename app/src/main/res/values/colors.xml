@@ -5,4 +5,5 @@
     <color name="colorAccent">#AEAEAE</color>
     <color name="white">#fff</color>
     <color name="hango_pressed">#E3F2FD</color>
+    <color name="light_gray">#E0E0E0</color>
 </resources>
