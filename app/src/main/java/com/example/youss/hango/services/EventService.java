@@ -16,12 +16,17 @@ public class EventService {
         public String EventName;
         public String CreatorName;
         public String CreatorEmail;
+        public String EventDescription;
+        public String EventDate;
+        public String EventTime;
 
-        public AddEventRequest(String eventName, String creatorName, String creatorEmail) {
-
+        public AddEventRequest(String eventName, String creatorName, String creatorEmail, String eventDescription, String eventDate, String eventTime) {
             EventName = eventName;
             CreatorName = creatorName;
             CreatorEmail = creatorEmail;
+            EventDescription = eventDescription;
+            EventDate = eventDate;
+            EventTime=eventTime;
         }
     }
 

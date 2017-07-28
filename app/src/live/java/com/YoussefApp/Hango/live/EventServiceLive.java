@@ -10,13 +10,11 @@ import com.example.youss.hango.services.EventService;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ServerValue;
 import com.firebase.client.ValueEventListener;
 import com.squareup.otto.Subscribe;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class EventServiceLive extends  LiveServiceBaseClass {
     public EventServiceLive(Hango application) {
@@ -30,9 +28,21 @@ public class EventServiceLive extends  LiveServiceBaseClass {
         if(request.EventName.isEmpty()) {
             response.setError("HangoName","Please Choose a Hango Name");
         }
+        if(request.EventDescription.isEmpty())
+        {
+            response.setError("HangoDescription","Please Enter a Description");
+        }
+        if(request.EventDate.isEmpty())
+        {
+            response.setError("HangoDate","Please Choose a Valid Date");
+        }
+        if(request.EventTime.isEmpty())
+        {
+            response.setError("HangoTime","Please Choose a Valid Time");
+        }
         if(response.didSucceed()) {
 
-            Event event= new Event(request.EventName,request.CreatorEmail, request.CreatorName);
+            Event event= new Event(request.EventName,request.EventDescription,request.EventDate,request.CreatorEmail, request.CreatorName,request.EventTime);
             Toast.makeText(application.getApplicationContext(),"Your Hango Was Posted Successfully",Toast.LENGTH_LONG).show();
         }
         myBus.post(response);
