@@ -90,6 +90,11 @@ public class MainActivity extends BaseActivity {
                         HangoInfo.add(event.getid());
                         HangoInfo.add(event.geteventName());
                         HangoInfo.add(event.getcreatorEmail());
+                        HangoInfo.add(event.getEventDate());
+                        HangoInfo.add(event.getEventTime());
+                        HangoInfo.add(event.getEventDescription());
+                        HangoInfo.add(event.getcreator());
+
                         startActivity(HangoDetails.newInstance(getApplicationContext(),HangoInfo));
                     }
                 });
