@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_Hango_Details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:id="@+id/layout_Hango_Details"
-    android:background="@color/white">
+    android:weightSum="1">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -31,7 +31,6 @@
             android:text="Youssef Zaky"
             android:textColor="@color/colorAccent"
             android:textSize="19sp" />
-
 
     </LinearLayout>
 
@@ -59,6 +58,12 @@
             android:textColor="@color/colorAccent"
             android:textSize="19sp" />
 
+        <ImageView
+            android:id="@+id/edit_date_button"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_toRightOf="@+id/HangoDate"
+            android:background="@mipmap/ic_edit" />
 
     </LinearLayout>
 
@@ -85,30 +90,55 @@
             android:text="HH/mm"
             android:textColor="@color/colorAccent"
             android:textSize="19sp" />
+
+        <ImageView
+            android:id="@+id/edit_time_button"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_toRightOf="@+id/HangoTime"
+            android:background="@mipmap/ic_edit"
+
+            />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="20dp">
-        <TextView
-            android:id="@+id/HangoDescriptionText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/HangoHour"
-            android:paddingTop="10dp"
-            android:text="Description "
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="19sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/HangoDescriptionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/HangoHour"
+                android:paddingTop="10dp"
+                android:text="Description "
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="19sp" />
+
+            <ImageView
+                android:id="@+id/edit_desc_button"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_toRightOf="@+id/HangoDescriptionText"
+
+                android:background="@mipmap/ic_edit" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/HangoDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/HangoDescriptionText"
+            android:paddingTop="8dp"
             android:text="This is a Description"
             android:textColor="@color/colorAccent"
-            android:textSize="19sp"
-            android:paddingTop="8dp"/>
+            android:textSize="19sp" />
 
     </LinearLayout>
 </LinearLayout>

@@ -7,10 +7,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.youss.hango.R;
+import com.example.youss.hango.dialog.ChangeHangoDateFragment;
+import com.example.youss.hango.dialog.ChangeHangoDescFragment;
 import com.example.youss.hango.dialog.ChangeHangoNameFragment;
+import com.example.youss.hango.dialog.ChangeHangoTimeFragment;
 import com.example.youss.hango.dialog.DeleteEventDialogFragment;
 import com.example.youss.hango.entities.Event;
 import com.example.youss.hango.infrastructure.Utilities;
@@ -23,6 +28,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HangoDetails extends BaseActivity {
 
@@ -40,6 +46,14 @@ public class HangoDetails extends BaseActivity {
     @BindView(R.id.HangoDescription)
     TextView HangoDescriptionTextView;
 
+    @BindView(R.id.edit_desc_button)
+    ImageView edit_desc_button;
+
+    @BindView(R.id.edit_time_button)
+    ImageView edit_time_button;
+
+    @BindView(R.id.edit_date_button)
+    ImageView edit_date_button;
     private String HangoID;
     private String HangoName;
     private String HangoOwner;
@@ -78,6 +92,11 @@ public class HangoDetails extends BaseActivity {
         HangoDateTextView.setText(HangoDate);
         HangoTimeTextView.setText(HangoTime);
         HangoDescriptionTextView.setText(HangoDescription);
+        if (!Utilities.encodeEmail(HangoOwner).equals(UserEmail)) {
+            edit_date_button.setVisibility(View.GONE); // if authenticated user = creator
+            edit_desc_button.setVisibility(View.GONE);
+            edit_time_button.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -117,7 +136,34 @@ public class HangoDetails extends BaseActivity {
         return true;
     }
 
+    @OnClick(R.id.edit_date_button)
+    public void edit_date(){
+        ArrayList<String> HangoInfo = new ArrayList<>();
+        HangoInfo.add(HangoID);
+        HangoInfo.add(HangoDate);
+        DialogFragment dialog = ChangeHangoDateFragment.newInstance(HangoInfo);
+        dialog.show(getFragmentManager(), ChangeHangoNameFragment.class.getSimpleName());
 
+    }
+
+    @OnClick(R.id.edit_time_button)
+    public void edit_time(){
+        ArrayList<String> HangoInfo = new ArrayList<>();
+        HangoInfo.add(HangoID);
+        HangoInfo.add(HangoTime);
+        DialogFragment dialog = ChangeHangoTimeFragment.newInstance(HangoInfo);
+        dialog.show(getFragmentManager(), ChangeHangoTimeFragment.class.getSimpleName());
+
+    }
+    @OnClick(R.id.edit_desc_button)
+    public void edit_desc(){
+        ArrayList<String> HangoInfo = new ArrayList<>();
+        HangoInfo.add(HangoID);
+        HangoInfo.add(HangoDescription);
+        DialogFragment dialog = ChangeHangoDescFragment.newInstance(HangoInfo);
+        dialog.show(getFragmentManager(), ChangeHangoDescFragment.class.getSimpleName());
+
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -126,9 +172,15 @@ public class HangoDetails extends BaseActivity {
 
     @Subscribe
     public void getCurrentHango(EventService.GetCurrentHangoResponse response) {
+        //To update in real time the hango details activity without going back to the events list.
+        //So when we update for example the event title, by clicking ok, it will be updated directly in the event
+        //activity
         HangoListener = response.valueEventListener;
         CurrentHango = response.event;
         getSupportActionBar().setTitle(CurrentHango.geteventName());
+        HangoDateTextView.setText(CurrentHango.getEventDate());
+        HangoTimeTextView.setText(CurrentHango.getEventTime());
+        HangoDescriptionTextView.setText(CurrentHango.getEventDescription());
         if (response.event != null) {
 
         }

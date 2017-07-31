@@ -80,7 +80,76 @@ public class EventServiceLive extends  LiveServiceBaseClass {
         }
         myBus.post(response);
     }
+    @Subscribe
+    public void changeHangoDate(EventService.ChangeHangoDateRequest request)
+    {
+        EventService.ChangeHangoDateResponse response =new EventService.ChangeHangoDateResponse();
+        if(request.NewHangoDate.isEmpty())
+        {
+            response.setError("Hango Date","Please Provide a Valid Date");
 
+        }
+
+        if(response.didSucceed()){
+
+            Firebase ref= new Firebase(Utilities.FireBaseHangoReferences + request.HangoCreatorEmail+"/"+request.HangoID);
+            long TimeLastChanged=System.currentTimeMillis();
+            //Update the database with updateChildren in case we lost connection
+            Map newData= new HashMap();
+            newData.put("eventDate",request.NewHangoDate);
+            newData.put("dateLastChanged",TimeLastChanged);
+            ref.updateChildren(newData);
+
+        }
+        myBus.post(response);
+    }
+
+    @Subscribe
+    public void changeHangoDesc(EventService.ChangeHangoDescRequest request)
+    {
+        EventService.ChangeHangoDescResponse response =new EventService.ChangeHangoDescResponse();
+        if(request.NewHangoDesc.isEmpty())
+        {
+            response.setError("Hango Desc","Please Provide a Valid Description");
+
+        }
+
+        if(response.didSucceed()){
+
+            Firebase ref= new Firebase(Utilities.FireBaseHangoReferences + request.HangoCreatorEmail+"/"+request.HangoID);
+            long TimeLastChanged=System.currentTimeMillis();
+            //Update the database with updateChildren in case we lost connection
+            Map newData= new HashMap();
+            newData.put("eventDescription",request.NewHangoDesc);
+            newData.put("dateLastChanged",TimeLastChanged);
+            ref.updateChildren(newData);
+
+        }
+        myBus.post(response);
+    }
+    @Subscribe
+    public void changeHangoTime(EventService.ChangeHangoTimeRequest request)
+    {
+        EventService.ChangeHangoTimeResponse response =new EventService.ChangeHangoTimeResponse();
+        if(request.NewHangoTime.isEmpty())
+        {
+            response.setError("Hango Time","Please Provide a Valid Time");
+
+        }
+
+        if(response.didSucceed()){
+
+            Firebase ref= new Firebase(Utilities.FireBaseHangoReferences + request.HangoCreatorEmail+"/"+request.HangoID);
+            long TimeLastChanged=System.currentTimeMillis();
+            //Update the database with updateChildren in case we lost connection
+            Map newData= new HashMap();
+            newData.put("eventTime",request.NewHangoTime);
+            newData.put("dateLastChanged",TimeLastChanged);
+            ref.updateChildren(newData);
+
+        }
+        myBus.post(response);
+    }
     @Subscribe
     public void getCurrentHango(EventService.GetCurrentHangoRequest request)
     {

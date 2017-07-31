@@ -62,6 +62,61 @@ public class EventService {
     {
 
     }
+    public static class ChangeHangoDateRequest {
+
+        public String NewHangoDate;
+        public String HangoID;
+        public String HangoCreatorEmail;
+
+        public ChangeHangoDateRequest(String newHangoDate, String hangoID, String hangoCreatorEmail) {
+            NewHangoDate = newHangoDate;
+            HangoID = hangoID;
+            HangoCreatorEmail = hangoCreatorEmail;
+        }
+
+    }
+
+    public static class ChangeHangoDateResponse extends ServiceResponse
+    {
+
+    }
+    public static class ChangeHangoTimeRequest{
+
+        public String NewHangoTime;
+        public String HangoID;
+        public String HangoCreatorEmail;
+
+        public ChangeHangoTimeRequest(String newHangoTime, String hangoID, String hangoCreatorEmail) {
+            NewHangoTime = newHangoTime;
+            HangoID = hangoID;
+            HangoCreatorEmail = hangoCreatorEmail;
+        }
+
+    }
+
+    public static class ChangeHangoTimeResponse extends ServiceResponse
+    {
+
+    }
+
+    public static class ChangeHangoDescRequest{
+
+        public String NewHangoDesc;
+        public String HangoID;
+        public String HangoCreatorEmail;
+
+        public ChangeHangoDescRequest(String newHangoDesc, String hangoID, String hangoCreatorEmail) {
+            NewHangoDesc = newHangoDesc;
+            HangoID = hangoID;
+            HangoCreatorEmail = hangoCreatorEmail;
+        }
+
+    }
+
+    public static class ChangeHangoDescResponse extends ServiceResponse
+    {
+
+    }
     public static class GetCurrentHangoRequest{
         public Firebase ref;
 

@@ -1,11 +1,16 @@
 package com.example.youss.hango.dialog;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.youss.hango.R;
 import com.example.youss.hango.entities.SharedWithUsers;
@@ -18,11 +23,13 @@ import com.firebase.client.ValueEventListener;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class ChangeHangoNameFragment extends BaseDialog implements View.OnClickListener {
+public class ChangeHangoDateFragment extends BaseDialog implements View.OnClickListener {
 
     public static final String HANGO_EXTRA_INFO = "Hango_Extra_Info"; // To receive the event information
     private ValueEventListener SharedWithListener; // interface can be used to receive events about data changes at location using queries ! it will
@@ -32,13 +39,17 @@ public class ChangeHangoNameFragment extends BaseDialog implements View.OnClickL
     private String HangoID;
 
     @BindView(R.id.edit_hango_EditText)
-    EditText newHangoName;
+    EditText newHangoDate;
 
+    @BindView(R.id.calendariconedit)
+    ImageView calendarIcon;
 
-    public static ChangeHangoNameFragment newInstance(ArrayList<String> HangoInfo) {
+    final Calendar calendar = Calendar.getInstance();
+
+    public static ChangeHangoDateFragment newInstance(ArrayList<String> HangoInfo) {
         Bundle args = new Bundle();
         args.putStringArrayList(HANGO_EXTRA_INFO, HangoInfo);
-        ChangeHangoNameFragment dialog = new ChangeHangoNameFragment();
+        ChangeHangoDateFragment dialog = new ChangeHangoDateFragment();
         dialog.setArguments(args);
         return dialog;
     }
@@ -54,11 +65,11 @@ public class ChangeHangoNameFragment extends BaseDialog implements View.OnClickL
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = getActivity().getLayoutInflater().inflate(R.layout.edit_hangotitle, null);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.edit_hangodate, null);
         ButterKnife.bind(this, view);
-        newHangoName.setText(getArguments().getStringArrayList(HANGO_EXTRA_INFO).get(1));
+        newHangoDate.setText( getArguments().getStringArrayList(HANGO_EXTRA_INFO).get(1));
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).setView(view).setPositiveButton("Change", null)
-                .setNegativeButton("Cancel", null).setTitle("Change Hango Title ?").show();
+                .setNegativeButton("Cancel", null).setTitle("Change Hango Date ?").show();
 
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(this);
 
@@ -76,26 +87,23 @@ public class ChangeHangoNameFragment extends BaseDialog implements View.OnClickL
                     //capture that we have fired a request
                     Firebase Friendlist = new Firebase(Utilities.FireBaseHangoReferences + Utilities.encodeEmail(u.getEmail()) +
                             "/" + HangoID);
-                    // Post a change event name request with the desired event in the user events list
-                    mybus.post(new EventService.ChangeHangoNameRequest(newHangoName.getText().toString(), HangoID,
+                    mybus.post(new EventService.ChangeHangoDateRequest(newHangoDate.getText().toString(), HangoID,
                             Utilities.encodeEmail(u.getEmail())));
                     //update the last time changed
                     mybus.post(new EventService.UpdateList(Friendlist));
                 }
             }
         }
-        //post a change event name request with the desired event in the Creator events list
-        mybus.post(new EventService.ChangeHangoNameRequest(newHangoName.getText().toString(), HangoID, userEmail));
+        mybus.post(new EventService.ChangeHangoDateRequest(newHangoDate.getText().toString(), HangoID, userEmail));
         Firebase Owner = new Firebase(Utilities.FireBaseHangoReferences + "/" + userEmail + "/" + HangoID);
-        //update time last changed
         mybus.post(new EventService.UpdateList(Owner));
     }
 
     @Subscribe
-    public void changeHangoName(EventService.ChangeHangoNameResponse response) {
+    public void changeHangoDate(EventService.ChangeHangoDateResponse response) {
 
         if (!response.didSucceed()) {
-            newHangoName.setError(response.getError("Hango Name"));
+            newHangoDate.setError(response.getError("Hango Date"));
         }
         dismiss();
     }
@@ -104,6 +112,27 @@ public class ChangeHangoNameFragment extends BaseDialog implements View.OnClickL
     public void onDestroy() {
         super.onDestroy();
         SharedWithRef.removeEventListener(SharedWithListener);
+
+    }
+
+    @OnClick(R.id.calendariconedit)
+    public void showDatePickerDialog(View view) {
+        DatePickerDialog StartTime = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, monthOfYear);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel(newHangoDate);
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        StartTime.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        StartTime.show();
+    }
+
+    public void updateLabel(EditText Date) {
+        String format = "dd/MM/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.CANADA);
+        Date.setText(sdf.format(calendar.getTime()));
     }
 
     @Subscribe

@@ -56,9 +56,9 @@
             android:layout_gravity="left"
             android:layout_weight="0.36"
             android:ems="10"
-            android:focusable="false"
             android:hint="Date DD/MM/YYYY"
             android:inputType="date"
+            android:focusable="false"
             android:longClickable="false"
             android:textColorHint="@color/colorAccent" />
 
