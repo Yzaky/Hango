@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity {
                       //  Log.i("User Email",UserEmail);
                         if(UserEmail.equals(Utilities.encodeEmail(event.getcreatorEmail())))
                         {
-                            DialogFragment dialogFragment= DeleteEventDialogFragment.newInstance(event.getid(),true);
+                            DialogFragment dialogFragment= DeleteEventDialogFragment.newInstance(event.getid(),event.getcreatorEmail(),true);
                             dialogFragment.show(getFragmentManager(),DeleteEventDialogFragment.class.getSimpleName());
                              return true;
                         }
@@ -144,9 +144,9 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
                 return true;
-           /* case R.id.sort:
+            case R.id.sort:
                 startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
-                return true;*/
+                return true;
             case R.id.friends:
                 startActivity(new Intent(this, AddFriendActivity.class));
                 return true;

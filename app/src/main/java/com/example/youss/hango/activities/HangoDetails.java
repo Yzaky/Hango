@@ -88,7 +88,7 @@ public class HangoDetails extends BaseActivity {
         HangoRef = new Firebase(Utilities.FireBaseHangoReferences + UserEmail + "/" + HangoID);
         myBus.post(new EventService.GetCurrentHangoRequest(HangoRef));
         getSupportActionBar().setTitle(HangoName);
-        HangoCreatorTextView.setText(HangoCreator);
+        HangoCreatorTextView.setText(HangoCreator+" ("+HangoOwner+")");
         HangoDateTextView.setText(HangoDate);
         HangoTimeTextView.setText(HangoTime);
         HangoDescriptionTextView.setText(HangoDescription);
@@ -124,14 +124,18 @@ public class HangoDetails extends BaseActivity {
                 return true;
 
             case R.id.delete_hango: // Si on veut supprimer l'evenemnet
-                DialogFragment dialog1 = DeleteEventDialogFragment.newInstance(HangoID, false);
+                DialogFragment dialog1 = DeleteEventDialogFragment.newInstance(HangoID,HangoOwner, false);
                 dialog1.show(getFragmentManager(), DeleteEventDialogFragment.class.getSimpleName());
                 return true;
 
             case R.id.share_hango:// Si on veut le partager, on met le Hango ID dans un intent qu'on declare dans la class de share
-                startActivity(SharedWithActivity.newIntent(getApplicationContext(), HangoID));
-                return true;
-
+                if (Utilities.encodeEmail(HangoOwner).equals(UserEmail)){
+                    startActivity(SharedWithActivity.newIntent(getApplicationContext(), HangoID));
+                }
+                else{
+                    startActivity(SharedWithActivityNC.newIntent(getApplicationContext(), HangoID));
+                }
+                    return true;
         }
         return true;
     }

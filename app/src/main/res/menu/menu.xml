@@ -8,7 +8,7 @@
         android:title="logout"
         app:showAsAction="never"
         />
-  <!--  <item
+    <item
         android:id="@+id/sort"
         app:showAsAction="ifRoom"
         android:title="Sort"
