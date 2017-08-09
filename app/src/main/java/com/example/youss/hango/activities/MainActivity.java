@@ -38,6 +38,8 @@ public class MainActivity extends BaseActivity {
     FirebaseRecyclerAdapter myAdapter;
 
     private String bar;
+    private RecyclerView recyclerView1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +70,7 @@ public class MainActivity extends BaseActivity {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getApplication());
         String Order=sharedPreferences.getString(Utilities.MyPreferences,Utilities.OrderByKey);
         Query SortQuery;
-        //Log.i(MainActivity.class.getSimpleName(),Sort);
+
         if(Order.equals(Utilities.OrderByKey))
         {
             SortQuery=EventRef.orderByKey();
@@ -84,8 +86,7 @@ public class MainActivity extends BaseActivity {
                 eventsListViewHolder.LayoutView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                       /* Toast.makeText(getApplicationContext(),event.geteventName()
-                                +" was clicked",Toast.LENGTH_LONG).show();*/
+
                         ArrayList<String> HangoInfo= new ArrayList<>();
                         HangoInfo.add(event.getid());
                         HangoInfo.add(event.geteventName());
@@ -119,7 +120,7 @@ public class MainActivity extends BaseActivity {
                 });
             }
         };
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(myAdapter);
     }
 
