@@ -24,7 +24,8 @@
         app:borderWidth="0dp"
         app:elevation="6dp"
         style="@style/EvAB"
+        
         app:pressedTranslationZ="12dp"
-        android:src="@mipmap/ic_plus"
+        android:src="@mipmap/ic_event"
          />
 </RelativeLayout>
