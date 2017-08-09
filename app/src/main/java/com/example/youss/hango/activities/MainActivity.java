@@ -38,8 +38,6 @@ public class MainActivity extends BaseActivity {
     FirebaseRecyclerAdapter myAdapter;
 
     private String bar;
-    private RecyclerView recyclerView1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +68,7 @@ public class MainActivity extends BaseActivity {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getApplication());
         String Order=sharedPreferences.getString(Utilities.MyPreferences,Utilities.OrderByKey);
         Query SortQuery;
-
+        //Log.i(MainActivity.class.getSimpleName(),Sort);
         if(Order.equals(Utilities.OrderByKey))
         {
             SortQuery=EventRef.orderByKey();
@@ -86,7 +84,8 @@ public class MainActivity extends BaseActivity {
                 eventsListViewHolder.LayoutView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                       /* Toast.makeText(getApplicationContext(),event.geteventName()
+                                +" was clicked",Toast.LENGTH_LONG).show();*/
                         ArrayList<String> HangoInfo= new ArrayList<>();
                         HangoInfo.add(event.getid());
                         HangoInfo.add(event.geteventName());
@@ -103,13 +102,13 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public boolean onLongClick(View view) {
                         //check that the owner of the list is the owner of the email right now
-                       // Log.i("Creator Email",Utilities.encodeEmail(event.getcreatorEmail()));
-                      //  Log.i("User Email",UserEmail);
+                        // Log.i("Creator Email",Utilities.encodeEmail(event.getcreatorEmail()));
+                        //  Log.i("User Email",UserEmail);
                         if(UserEmail.equals(Utilities.encodeEmail(event.getcreatorEmail())))
                         {
                             DialogFragment dialogFragment= DeleteEventDialogFragment.newInstance(event.getid(),event.getcreatorEmail(),true);
                             dialogFragment.show(getFragmentManager(),DeleteEventDialogFragment.class.getSimpleName());
-                             return true;
+                            return true;
                         }
                         else {
                             Toast.makeText(getApplicationContext(),"Only The Creator Can Delete The Hango",Toast.LENGTH_LONG)
@@ -120,7 +119,7 @@ public class MainActivity extends BaseActivity {
                 });
             }
         };
-        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(myAdapter);
     }
 
